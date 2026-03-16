@@ -707,7 +707,7 @@ function restoreMonth(){
 // COLLABORATIVE STORAGE — JSONBin.io
 // ═══════════════════════════════════════
 const JSONBIN_ID  = '69b7dfb9b7ec241ddc723179';
-const JSONBIN_KEY = '$2a$10$.YDxkXXWebD7Wx0MCxaumukERDmMGO4e6LNK6jDz9ETC8aAcEyf9G';
+const JSONBIN_KEY = '$2a$10$iyIN0zl9gSeecdBNyohLFeygrr8J9/rY92rYWKLnjaQKReEGcnhd.';
 const JSONBIN_URL = `https://api.jsonbin.io/v3/b/${JSONBIN_ID}`;
 
 let isSaving = false;
@@ -721,7 +721,7 @@ async function saveToStorage(){
     const payload={months,activeMonth,freelancers,DEPTS,GROUPS,nextDeptColorIdx};
     const res=await fetch(JSONBIN_URL, {
       method:'PUT',
-      headers:{'Content-Type':'application/json','X-Master-Key':JSONBIN_KEY},
+      headers:{'Content-Type':'application/json','X-Master-Key':JSONBIN_KEY,'X-Access-Key':JSONBIN_KEY},
       body:JSON.stringify(payload)
     });
     if(res.ok) flashSaved();
@@ -737,7 +737,7 @@ async function saveToStorage(){
 async function loadFromStorage(){
   try{
     const res=await fetch(JSONBIN_URL+'/latest', {
-      headers:{'X-Master-Key':JSONBIN_KEY}
+      headers:{'X-Master-Key':JSONBIN_KEY,'X-Access-Key':JSONBIN_KEY}
     });
     if(!res.ok) return false;
     const json=await res.json();
